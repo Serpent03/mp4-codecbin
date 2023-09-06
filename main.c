@@ -24,6 +24,8 @@ int main()
     printf("this is a png file");
 
     // REFER => https://gamedev.stackexchange.com/questions/102490/fastest-way-to-render-image-data-from-buffer
+    // REFER => https://www.gamedev.net/forums/topic/683956-blit-a-byte-array-of-pixels-to-screen-in-sdl-fast/5320207/
+    // retro theme, menlo
 
     // get a RGBA array from this PNG file,
     // and then display it in the SDL blitting window
