@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#define SDL_MAIN_HANDLED
+#include "SDL/include/SDL2/SDL.h"
 
 typedef unsigned char byte;
 
@@ -20,4 +22,8 @@ int main()
     fread(fileData, 1, byteArrSize, filePointer);
     assert(memcmp(pngsig, fileData, sizeof(byte)) == 0);
     printf("this is a png file");
+
+    // get a RGBA array from this PNG file,
+    // and then display it in the SDL blitting window
+
 }
