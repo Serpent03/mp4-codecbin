@@ -6,21 +6,41 @@
 #include "SDL/include/SDL2/SDL.h"
 
 typedef unsigned char byte;
+typedef unsigned int byte_4;
 
-static const byte pngsig[8] = {137, 80, 78, 71, 13, 10, 26, 10};
+void print4ByteArray(byte_4* arr, int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        printf("->%04x\n", arr[i] / 1024);
+    }
+}
+
+void printByteArray(byte* byteArr, int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        printf("->%02x\n", byteArr[i]);
+    }
+}
 
 int main()
 {
-    int byteArrSize = 8;
+    int byteArrSize = 8;    
+    byte pngsig[8] = {137, 80, 78, 71, 13, 10, 26, 10};
     byte* fileData = (byte *)malloc(byteArrSize * sizeof(byte));
+    byte_4 wh[1];
 
     FILE* filePointer;
     filePointer = fopen("img.png", "rb");
     assert(filePointer != NULL);
     
-    // fseek(filePointer, 1, SEEK_CUR);
     fread(fileData, 1, byteArrSize, filePointer);
     assert(memcmp(pngsig, fileData, sizeof(byte)) == 0);
+    fseek(filePointer, 15, SEEK_CUR);
+    fread(wh, 4, 1, filePointer);
+    print4ByteArray(wh, 1);
+
     printf("this is a png file");
 
     // REFER => https://gamedev.stackexchange.com/questions/102490/fastest-way-to-render-image-data-from-buffer
