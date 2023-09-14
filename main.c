@@ -4,21 +4,9 @@
 #include <assert.h>
 #define SDL_MAIN_HANDLED
 #include "SDL/include/SDL2/SDL.h"
-
-typedef unsigned char byte;
-typedef unsigned int byte_4;
-
-#define IHDR_OFFSET 16
+#include "hdr.h"
 
 byte pngsig[4] = {137, 80, 78, 71};
-
-typedef struct PNG_HDR
-{
-    byte* fileData;
-    byte_4 width;
-    byte_4 height;
-} PNG_HDR ;
-
 
 void printByteArray(byte* byteArr, int size)
 {
@@ -35,7 +23,7 @@ byte_4 combineByteIntoInt(byte* arr)
     //               arr[2]
     //                      arr[3]
 
-    // OR OPERATION ON ALL OF THESE:
+    // BITWISE OR OPERATION ON ALL OF THESE:
     // arr[0] arr[1] arr[2] arr[3]
 
     return (arr[0] << 24 | arr[1] << 16 | arr[2] << 8 | arr[3]);
@@ -79,7 +67,7 @@ int main()
     // REFER => https://www.gamedev.net/forums/topic/683956-blit-a-byte-array-of-pixels-to-screen-in-sdl-fast/5320207/
     // REFER => https://progbook.org/png.html
 
-    // nineties -> apple dark / capitola | menlo
+    // tomorrow night 80s blue  -> apple dark / capitola | menlo
 
     // get a RGBA array from this PNG file,
     // and then display it in the SDL blitting window
